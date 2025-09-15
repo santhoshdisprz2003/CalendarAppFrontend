@@ -1,0 +1,73 @@
+/* Dialog Header */
+.details-dialog-title {
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #bbdefb;
+  border-bottom: 2px solid #1976d2;
+}
+
+.details-title-text {
+  color: #0d47a1;
+  font-weight: 700;
+}
+
+.details-close-btn {
+  color: red;
+}
+
+/* Content */
+.details-dialog-content {
+  background-color: #fffde7; /* light yellow background */
+}
+
+.details-section {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background-color: #e3f2fd; /* light blue card */
+  border: 1px solid #1389ea;
+}
+
+.details-section-heading {
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* Actions */
+.details-actions {
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.details-edit-btn {
+  background-color: #e3f2fd !important;
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+}
+
+.details-edit-btn:hover {
+  background-color: #bbdefb !important;
+}
+
+.details-delete-btn {
+  background-color: #ffebee !important;
+  color: #d32f2f !important;
+  font-weight: 600 !important;
+}
+
+.details-delete-btn:hover {
+  background-color: #ffcdd2 !important;
+}
+
+.details-close-action-btn {
+  background-color: #f1f8e9 !important;
+  color: #388e3c !important;
+  font-weight: 600 !important;
+}
+
+.details-close-action-btn:hover {
+  background-color: #c8e6c9 !important;
+}

@@ -1,13 +1,28 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+    /* src/index.css (example) */
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+            sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+    #root {
+        height: 100vh; /* Ensure the root element takes full viewport height */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rbc-calendar {
+        /* Custom styles for the calendar if needed */
+    }
+
+    /* Media queries for smaller screens */
+    @media (max-width: 600px) {
+        .MuiContainer-root {
+            padding: 8px; /* Reduce padding on small screens */
+        }
+        /* Adjust other component styles as needed */
+    }
+    

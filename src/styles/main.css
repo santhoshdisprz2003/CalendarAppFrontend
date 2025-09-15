@@ -1,0 +1,87 @@
+/* Global Variables (like Sass variables but in CSS) */
+:root {
+  --primary-color: #1976d2;
+  --secondary-color: #f5f5f5;
+  --danger-color: #d32f2f;
+  --text-color: #333;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --font-family: 'Roboto', sans-serif;
+}
+
+/* Reset */
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+/* Calendar wrapper */
+.calendar-container {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 16px;
+  height: calc(100vh - 80px);
+}
+
+/* Big Calendar overrides */
+.rbc-calendar {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 10px;
+  background: #fff;
+}
+
+.rbc-event {
+  background: var(--primary-color);
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.rbc-today {
+  background: #e3f2fd;
+}
+
+/* Sidebar */
+.sidebar-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sidebar-subtitle {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.sidebar-appointment {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+
+.sidebar-appointment:last-child {
+  border-bottom: none;
+}
+
+/* Buttons */
+button,
+.MuiButton-root {
+  border-radius: var(--border-radius);
+  text-transform: none !important;
+}
+
+.MuiButton-containedPrimary {
+  background-color: var(--primary-color) !important;
+}
+
+.MuiButton-outlined {
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.MuiButton-textError {
+  color: var(--danger-color) !important;
+}

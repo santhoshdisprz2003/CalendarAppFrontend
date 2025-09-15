@@ -1,0 +1,187 @@
+/* Root */
+.calendar-root {
+  display: flex;
+  height: 100vh;
+}
+
+.calendar-root.light {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.calendar-root.dark {
+  background-color: #121212;
+  color: #fff;
+}
+
+/* Main Content */
+.calendar-main {
+  flex-grow: 1;
+  transition: margin 0.3s ease, width 0.3s ease;
+}
+
+/* AppBar */
+.calendar-appbar {
+  background-color: #1976d2 !important;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.calendar-menu-btn {
+  color: #fff !important;
+  margin-right: 16px !important;
+}
+
+/* Header */
+.calendar-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 16px !important;
+  margin-bottom: 16px !important;
+  border-radius: 12px !important;
+  background-color: #fff !important;
+}
+
+.calendar-root.dark .calendar-header {
+  background-color: #1e1e1e !important;
+}
+
+.calendar-toggle-btn {
+  border-radius: 12px !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.calendar-create-btn {
+  border-radius: 12px !important;
+  background-color: #4caf50 !important;
+}
+
+.calendar-create-btn:hover {
+  background-color: #2e7d32 !important;
+}
+
+/* Calendar Container */
+.calendar-container {
+  padding: 16px !important;
+}
+
+/* Calendar Paper */
+.calendar-wrapper {
+  padding: 16px !important;
+  border-radius: 12px !important;
+  height: 75vh !important;
+  overflow: hidden !important;
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.calendar-root.dark .calendar-wrapper {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+}
+
+/* Calendar Toolbar */
+.calendar-toolbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 16px !important;
+}
+
+.calendar-nav-btn {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 4px 16px !important;
+}
+
+.calendar-nav-btn:hover {
+  background-color: #333 !important;
+}
+
+/* BigCalendar Overrides */
+.rbc-month-view,
+.rbc-time-view {
+  border-spacing: 8px !important;
+}
+
+.rbc-day-bg,
+.rbc-header {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.rbc-month-view .rbc-row {
+  margin-bottom: 8px !important;
+}
+
+.rbc-event,
+.calendar-event {
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+  font-weight: 500 !important;
+  background-color: #2688ea !important;
+  color: white !important;
+}
+
+/* Background for empty day cells */
+.rbc-day-bg {
+  background-color: #f9f9f9 !important;
+  border: 1px solid #e0e0e0 !important;
+  color: #000 !important;
+}
+
+.calendar-root.dark .rbc-day-bg {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  color: #fff !important;
+}
+
+.rbc-day-bg:hover {
+  background-color: #e8f0fe !important;
+}
+
+.calendar-root.dark .rbc-day-bg:hover {
+  background-color: #3a3a3a !important;
+}
+
+/* Highlight Current Day */
+.rbc-today {
+  background-color: white !important;
+  border: 2px solid black !important;
+  border-radius: 8px !important;
+}
+
+.calendar-root.dark .rbc-today {
+  border: 2px solid #fff !important;
+  background-color: #2a2a2a !important;
+}
+
+/* Toolbar Buttons */
+.rbc-toolbar button {
+  color: #000 !important;
+  background-color: #fff !important;
+  border: 1px solid #ccc !important;
+  text-transform: none !important;
+}
+
+.calendar-root.dark .rbc-toolbar button {
+  color: #fff !important;
+  background-color: #2c2c2c !important;
+  border: 1px solid #555 !important;
+}
+
+/* Active button highlight */
+.rbc-active {
+  background-color: #9ac7f4 !important;
+  color: #fff !important;
+  border-color: #115293 !important;
+}
+
+/* Ensure text in active button is visible */
+.rbc-active span,
+.rbc-active * {
+  color: #fff !important;
+}

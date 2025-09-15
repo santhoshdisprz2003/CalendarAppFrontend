@@ -1,0 +1,94 @@
+/* Sidebar Drawer */
+.sidebar-drawer {
+  width: 320px;
+  background-color: #f5f5f5;
+}
+
+/* Sidebar Container */
+.sidebar-container {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Section */
+.sidebar-header {
+  margin-bottom: 16px;
+  background-color: #e3f2fd;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.sidebar-header-title {
+  font-weight: 700 !important;
+  color: #1976d2 !important;
+}
+
+.sidebar-header-subtitle {
+  color: rgba(0, 0, 0, 0.6) !important;
+  margin-top: 4px !important;
+}
+
+/* Date Picker Section */
+.sidebar-datepicker {
+  margin-bottom: 8px;
+}
+
+/* Selected Date Chip */
+.sidebar-chip {
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 600 !important;
+}
+
+/* Upcoming Appointments Header */
+.sidebar-upcoming-header {
+  margin-bottom: 16px;
+  background-color: #e3f2fd;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+}
+
+/* Appointment List Container */
+.sidebar-appointment-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+  background-color: white;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* Appointment Card */
+.sidebar-card {
+  margin-bottom: 8px !important;
+  padding: 12px !important;
+  border-radius: 8px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.3s;
+}
+
+.sidebar-card:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* All Day vs Timed Backgrounds */
+.sidebar-card.allday {
+  background-color: #e8f5e9 !important;
+}
+
+.sidebar-card.timed {
+  background-color: #e3f2fd !important;
+}
+
+/* Empty State Messages */
+.sidebar-empty {
+  margin-top: 16px !important;
+  text-align: center;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.6);
+}

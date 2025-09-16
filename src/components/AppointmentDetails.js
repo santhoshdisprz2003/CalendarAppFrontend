@@ -82,9 +82,6 @@ const AppointmentDetails = ({ appointment, onClose, onEdit, onDelete }) => {
             Delete
           </Button>
         </Stack>
-        <Button onClick={onClose} className="details-close-action-btn">
-          Close
-        </Button>
       </DialogActions>
     </Dialog>
   );

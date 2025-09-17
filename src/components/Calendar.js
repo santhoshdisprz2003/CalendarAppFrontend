@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import moment from "moment";
 import {
   Box,
@@ -26,9 +27,11 @@ import {
   deleteAppointment,
 } from "../api/appointments";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "./Calendar.css";
 
 const localizer = momentLocalizer(moment);
+const DnDCalendar = withDragAndDrop(BigCalendar);
 
 function CustomToolbar({ label, onNavigate, onView, currentView }) {
   const views = ["month", "week", "day", "agenda"];
@@ -131,6 +134,27 @@ function Calendar() {
     }
   };
 
+  // 🔹 Handle Drag & Drop
+  const handleEventDrop = async ({ event, start, end }) => {
+    try {
+      const updatedEvent = { ...event, start, end };
+      await updateAppointment(event.id, {
+        ...event,
+        startTime: start,
+        endTime: end,
+      });
+
+      setEvents((prev) =>
+        prev.map((evt) => (evt.id === event.id ? updatedEvent : evt))
+      );
+
+      setSuccessMsg("Appointment moved successfully!");
+    } catch (err) {
+      console.error(err);
+      setConflictMsg("Failed to move appointment.");
+    }
+  };
+
   return (
     <Box className={`calendar-root ${darkMode ? "dark" : "light"}`}>
       <SidebarMenu
@@ -188,12 +212,15 @@ function Calendar() {
           </Paper>
 
           <Paper elevation={3} className="calendar-wrapper">
-            <BigCalendar
+            <DnDCalendar
               localizer={localizer}
               events={events}
               startAccessor="start"
               endAccessor="end"
               selectable
+              resizable
+              onEventDrop={handleEventDrop}
+              onEventResize={handleEventDrop}
               style={{ height: "100%" }}
               view={currentView}
               onView={(view) => setCurrentView(view)}

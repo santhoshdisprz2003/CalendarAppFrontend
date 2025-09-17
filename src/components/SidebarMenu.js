@@ -9,8 +9,9 @@ import {
   Paper,
   Stack,
   Chip,
+  TextField,
 } from "@mui/material";
-import { Delete, Edit, CalendarMonth } from "@mui/icons-material";
+import { Delete, Edit, CalendarMonth, Search } from "@mui/icons-material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -19,19 +20,31 @@ import "./SidebarMenu.css";
 
 const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidth }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Filter appointments by selected date
-  const filteredAppointments = selectedDate
+  let filteredAppointments = selectedDate
     ? appointments.filter((app) => dayjs(app.start).isSame(selectedDate, "day"))
     : [];
 
   // Show all upcoming if no date selected
-  const upcomingAppointments =
+  let upcomingAppointments =
     !selectedDate && appointments.length > 0
       ? [...appointments]
           .filter((app) => dayjs(app.start).isAfter(dayjs()))
           .sort((a, b) => new Date(a.start) - new Date(b.start))
       : [];
+
+  // Apply search filter to both filtered and upcoming
+  const applySearch = (apps) => {
+    if (!searchQuery.trim()) return apps;
+    return apps.filter((app) =>
+      app.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
+  filteredAppointments = applySearch(filteredAppointments);
+  upcomingAppointments = applySearch(upcomingAppointments);
 
   return (
     <Drawer
@@ -82,11 +95,23 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
           </Box>
         )}
 
+        {/* 🔎 Search Box (always visible) */}
+        <Box className="sidebar-search" sx={{ mt: 2, mb: 2 }}>
+          <TextField
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search appointments..."
+            size="small"
+            fullWidth
+            InputProps={{
+              startAdornment: <Search sx={{ mr: 1, color: "action.active" }} />,
+            }}
+          />
+        </Box>
+
         {/* Upcoming Appointments Header */}
         <Box className="sidebar-upcoming-header">
-          <Typography variant="subtitle1">
-            Upcoming Appointments
-          </Typography>
+          <Typography variant="subtitle1">Upcoming Appointments</Typography>
         </Box>
 
         {/* Appointment List */}
@@ -132,7 +157,7 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
                 </Paper>
               ))}
 
-            {/* If no date chosen → show all upcoming */}
+            {/* If no date chosen → show all upcoming (with search applied) */}
             {!selectedDate &&
               (upcomingAppointments.length > 0 ? (
                 upcomingAppointments.map((app) => (

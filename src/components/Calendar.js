@@ -134,8 +134,23 @@ function Calendar() {
     }
   };
 
-  // 🔹 Handle Drag & Drop
+  const hasConflict = (movedEvent, newStart, newEnd) => {
+    return events.some((evt) => {
+      if (evt.id === movedEvent.id) return false;
+      return (
+        (newStart >= evt.start && newStart < evt.end) ||
+        (newEnd > evt.start && newEnd <= evt.end) ||
+        (newStart <= evt.start && newEnd >= evt.end)
+      );
+    });
+  };
+
   const handleEventDrop = async ({ event, start, end }) => {
+    if (hasConflict(event, start, end)) {
+      setConflictMsg("Appointment conflict detected! Move canceled.");
+      return;
+    }
+
     try {
       const updatedEvent = { ...event, start, end };
       await updateAppointment(event.id, {

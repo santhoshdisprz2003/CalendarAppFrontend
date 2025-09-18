@@ -18,7 +18,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import "./SidebarMenu.css";
 
-const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidth }) => {
+const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidth,darkMode}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -51,7 +51,9 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
       anchor="left"
       open={open}
       onClose={onClose}
-      PaperProps={{ className: "sidebar-drawer" }}
+     PaperProps={{
+    className: `sidebar-drawer ${darkMode ? "dark" : ""}`,
+  }}
     >
       <Box className="sidebar-container">
         {/* Sidebar Header */}

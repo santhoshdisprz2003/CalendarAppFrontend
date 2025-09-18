@@ -191,6 +191,7 @@ function Calendar() {
           setShowForm(true);
         }}
         drawerWidth={drawerWidth}
+         darkMode={darkMode}
       />
 
       <Box

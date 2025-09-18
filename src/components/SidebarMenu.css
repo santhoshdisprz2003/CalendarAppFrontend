@@ -92,3 +92,67 @@
   font-style: italic;
   color: rgba(0, 0, 0, 0.6);
 }
+
+/* ===========================
+   Dark Mode Styles
+=========================== */
+.sidebar-drawer.dark {
+  background-color: #393737cc;
+  color: #fff;
+}
+
+.sidebar-drawer.dark .sidebar-container {
+  background-color: #393737cc;
+  color: #fff;
+}
+
+.sidebar-drawer.dark .sidebar-header {
+  background-color: #555;
+}
+
+.sidebar-drawer.dark .sidebar-header-title {
+  color: #fff !important;
+}
+
+.sidebar-drawer.dark .sidebar-header-subtitle {
+  color: #ddd !important;
+}
+
+.sidebar-drawer.dark .sidebar-upcoming-header {
+  background-color: #555;
+  color: #fff;
+}
+
+.sidebar-drawer.dark .sidebar-appointment-list {
+  background-color: #2b2b2b;
+}
+
+.sidebar-drawer.dark .sidebar-card {
+  background-color: #444 !important;
+  color: #fff;
+}
+
+.sidebar-drawer.dark .sidebar-card.allday {
+  background-color: #2e7d32 !important;
+  color: #fff;
+}
+
+.sidebar-drawer.dark .sidebar-card.timed {
+  background-color: #1565c0 !important;
+  color: #fff;
+}
+
+.sidebar-drawer.dark .sidebar-empty {
+  color: #bbb;
+}
+
+.sidebar-drawer.dark .MuiChip-root {
+  background-color: #1976d2 !important;
+  color: #fff !important;
+}
+
+.sidebar-drawer.dark input,
+.sidebar-drawer.dark .MuiInputBase-root {
+  background-color: #555 !important;
+  color: #fff !important;
+}

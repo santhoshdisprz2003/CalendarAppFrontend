@@ -248,8 +248,8 @@ function Calendar() {
         </Box>
       </Box>
 
-      {showForm && <AppointmentForm open={showForm} appointment={formMode === "edit" ? selectedAppointment : null} onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} />}
-      {showDetails && selectedAppointment && <AppointmentDetails appointment={selectedAppointment} onClose={() => setShowDetails(false)} onEdit={() => { setFormMode("edit"); setShowDetails(false); setShowForm(true); }} onDelete={async (id) => { await deleteAppointment(id); await fetchAppointments(); setShowDetails(false); setSuccessMsg("Appointment deleted successfully!"); }} />}
+      {showForm && <AppointmentForm open={showForm} appointment={formMode === "edit" ? selectedAppointment : null} onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} darkMode={darkMode}  />}
+      {showDetails && selectedAppointment && <AppointmentDetails appointment={selectedAppointment} onClose={() => setShowDetails(false)} onEdit={() => { setFormMode("edit"); setShowDetails(false); setShowForm(true); }} onDelete={async (id) => { await deleteAppointment(id); await fetchAppointments(); setShowDetails(false); setSuccessMsg("Appointment deleted successfully!"); }}darkMode={darkMode}  />}
 
       <Snackbar open={!!successMsg} autoHideDuration={4000} onClose={() => setSuccessMsg("")} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
         <Alert severity="success" onClose={() => setSuccessMsg("")}>{successMsg}</Alert>

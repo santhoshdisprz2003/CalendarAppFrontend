@@ -23,7 +23,7 @@ const safeDate = (date) => {
   return isNaN(d.getTime()) ? new Date() : d;
 };
 
-const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
+const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => {
   const [formData, setFormData] = useState({
     id: appointment?.id || 0,
     title: appointment?.title || '',
@@ -134,7 +134,9 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
       onClose={onCancel}
       maxWidth="sm"
       fullWidth
-      PaperProps={{ className: 'appointment-dialog-paper' }}
+      PaperProps={{
+        className: `appointment-dialog-paper ${darkMode ? "dark" : ""}`,
+      }}
     >
       <DialogTitle className="appointment-dialog-title">
         {formData.id ? 'Edit Appointment' : 'Create New Appointment'}

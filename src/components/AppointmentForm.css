@@ -76,3 +76,38 @@
   background-color: #4caf50 !important;
 }
 
+/* =======================
+   Dark Mode Styles
+======================= */
+.appointment-dialog-paper.dark {
+  background-color: #393737cc !important;
+  color: #fff !important;
+}
+
+.appointment-dialog-paper.dark .appointment-dialog-title {
+  background-color: #393737cc !important;
+  color: #fff !important;
+  border-bottom: 1px solid #fff !important;
+}
+
+.appointment-dialog-paper.dark .appointment-dialog-content {
+  background-color: #393737cc !important;
+  color: #fff !important;
+}
+
+.appointment-dialog-paper.dark .appointment-dialog-actions {
+  background-color: #393737cc !important;
+  border-top: 1px solid #fff !important;
+}
+
+.appointment-dialog-paper.dark input,
+.appointment-dialog-paper.dark textarea,
+.appointment-dialog-paper.dark .MuiInputBase-root {
+  background-color: #555 !important;
+  color: #fff !important;
+}
+
+.appointment-dialog-paper.dark label,
+.appointment-dialog-paper.dark .MuiFormControlLabel-label {
+  color: #fff !important;
+}

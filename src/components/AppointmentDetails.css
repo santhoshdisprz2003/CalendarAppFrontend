@@ -62,3 +62,39 @@
 }
 
 
+/* =======================
+   Dark Mode Styles
+======================= */
+.details-dialog-paper.dark {
+  background-color: #393737cc !important;
+  color: #fff !important;
+}
+
+.details-dialog-paper.dark .details-dialog-title {
+  background-color: #393737cc !important;
+  border-bottom: 2px solid #fff !important;
+}
+
+.details-dialog-paper.dark .details-title-text {
+  color: #fff !important;
+}
+
+.details-dialog-paper.dark .details-dialog-content {
+  background-color: #393737cc !important;
+  color: #fff !important;
+}
+
+.details-dialog-paper.dark .details-section {
+  background-color: #555 !important;
+  border: 1px solid #888 !important;
+  color: #fff !important;
+}
+
+.details-dialog-paper.dark .details-section-heading {
+  color: #fff !important;
+}
+
+.details-dialog-paper.dark .details-actions {
+  background-color: #393737cc !important;
+  border-top: 1px solid #fff !important;
+}

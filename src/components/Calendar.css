@@ -323,3 +323,103 @@ button,
 .MuiButton-textError {
   color: var(--danger-color) !important;
 }
+
+
+/* ===========================
+   Responsive Styles
+=========================== */
+
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .calendar-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+
+  .calendar-header h2 {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .calendar-toolbar {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+
+  .calendar-wrapper {
+    height: 70vh !important;
+  }
+}
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .calendar-root {
+    flex-direction: column !important;
+  }
+
+  .calendar-main {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .calendar-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-align: center !important;
+    padding: 12px !important;
+  }
+
+  .calendar-header h2 {
+    font-size: 1.2rem !important;
+  }
+
+  .calendar-header .MuiButton-root {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .calendar-toolbar {
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: center !important;
+  }
+
+  .calendar-toolbar button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .calendar-wrapper {
+    height: 65vh !important;
+    padding: 8px !important;
+  }
+
+  .rbc-calendar {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .calendar-header h2 {
+    font-size: 1rem !important;
+  }
+
+  .calendar-toolbar button {
+    font-size: 0.75rem !important;
+    padding: 4px 8px !important;
+  }
+
+  .rbc-calendar {
+    font-size: 0.7rem !important;
+  }
+
+  .calendar-wrapper {
+    height: 60vh !important;
+  }
+}

@@ -68,9 +68,16 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    let newValue = value;
+
+    if (name === "title") newValue = value.slice(0, 30);
+    if (name === "description") newValue = value.slice(0, 50);
+    if (name === "location") newValue = value.slice(0, 15);
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox' ? checked : newValue,
     }));
   };
 
@@ -138,6 +145,7 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
 
       <DialogContent dividers className="appointment-dialog-content">
         <Box component="form" noValidate>
+          {/* Title */}
           <TextField
             margin="normal"
             required
@@ -148,16 +156,20 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
             value={formData.title}
             onChange={handleChange}
             error={!!errors.title}
-            helperText={errors.title}
-            InputProps={{
-              endAdornment: errors.title && (
-                <InputAdornment position="end">
-                  <ErrorOutline color="error" />
-                </InputAdornment>
-              ),
+            helperText={errors.title || "Maximum 30 characters"}
+            inputProps={{ maxLength: 30 }}
+            slotProps={{
+              input: {
+                endAdornment: errors.title && (
+                  <InputAdornment position="end">
+                    <ErrorOutline color="error" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
 
+          {/* Description */}
           <TextField
             margin="normal"
             required
@@ -170,13 +182,16 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
             multiline
             rows={3}
             error={!!errors.description}
-            helperText={errors.description}
-            InputProps={{
-              endAdornment: errors.description && (
-                <InputAdornment position="end">
-                  <ErrorOutline color="error" />
-                </InputAdornment>
-              ),
+            helperText={errors.description || "Maximum 50 characters"}
+            inputProps={{ maxLength: 50 }}
+            slotProps={{
+              input: {
+                endAdornment: errors.description && (
+                  <InputAdornment position="end">
+                    <ErrorOutline color="error" />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
 
@@ -227,6 +242,7 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
             label="All Day Event"
           />
 
+          {/* Location */}
           <TextField
             margin="normal"
             fullWidth
@@ -235,13 +251,16 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open }) => {
             name="location"
             value={formData.location}
             onChange={handleChange}
+            helperText="Maximum 15 characters"
+            inputProps={{ maxLength: 15 }}
           />
 
+          {/* Attendees */}
           <TextField
             margin="normal"
             fullWidth
             id="attendees"
-            label="Attendees (comma-separated, optional)"
+            label="Attendees"
             name="attendees"
             value={formData.attendees}
             onChange={handleChange}

@@ -76,9 +76,7 @@
   background-color: #4caf50 !important;
 }
 
-/* =======================
-   Dark Mode Styles
-======================= */
+/*  Dark Mode Styles*/
 .appointment-dialog-paper.dark {
   background-color: #393737cc !important;
   color: #fff !important;

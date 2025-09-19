@@ -93,9 +93,7 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
-/* ===========================
-   Dark Mode Styles
-=========================== */
+/* Dark Mode Styles */
 .sidebar-drawer.dark {
   background-color: #393737cc;
   color: #fff;

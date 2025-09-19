@@ -18,14 +18,14 @@
 
 /* Content */
 .details-dialog-content {
-  background-color:white; /* light yellow background */
+  background-color:white; 
 }
 
 .details-section {
   padding: 16px;
   margin-bottom: 16px;
   border-radius: 8px;
-  background-color: #e3f2fd; /* light blue card */
+  background-color: #e3f2fd;
   border: 1px solid #1389ea;
 }
 
@@ -62,9 +62,7 @@
 }
 
 
-/* =======================
-   Dark Mode Styles
-======================= */
+/*  Dark Mode Styles */
 .details-dialog-paper.dark {
   background-color: #393737cc !important;
   color: #fff !important;

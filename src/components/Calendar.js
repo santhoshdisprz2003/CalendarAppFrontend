@@ -191,7 +191,7 @@ function Calendar() {
           setShowForm(true);
         }}
         drawerWidth={drawerWidth}
-         darkMode={darkMode}
+        darkMode={darkMode}
       />
 
       <Box
@@ -248,15 +248,46 @@ function Calendar() {
         </Box>
       </Box>
 
-      {showForm && <AppointmentForm open={showForm} appointment={formMode === "edit" ? selectedAppointment : null} onSubmit={handleFormSubmit} onCancel={() => setShowForm(false)} darkMode={darkMode}  />}
-      {showDetails && selectedAppointment && <AppointmentDetails appointment={selectedAppointment} onClose={() => setShowDetails(false)} onEdit={() => { setFormMode("edit"); setShowDetails(false); setShowForm(true); }} onDelete={async (id) => { await deleteAppointment(id); await fetchAppointments(); setShowDetails(false); setSuccessMsg("Appointment deleted successfully!"); }}darkMode={darkMode}  />}
+      {showForm && <AppointmentForm
+        open={showForm}
+        appointment={formMode === "edit" ? selectedAppointment : null}
+        onSubmit={handleFormSubmit}
+        onCancel={() => setShowForm(false)}
+        darkMode={darkMode} />}
 
-      <Snackbar open={!!successMsg} autoHideDuration={4000} onClose={() => setSuccessMsg("")} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
-        <Alert severity="success" onClose={() => setSuccessMsg("")}>{successMsg}</Alert>
+      {showDetails && selectedAppointment && <AppointmentDetails
+        appointment={selectedAppointment}
+        onClose={() => setShowDetails(false)}
+        onEdit={() => {
+          setFormMode("edit");
+          setShowDetails(false);
+          setShowForm(true);
+        }}
+        onDelete={async (id) => {
+          await deleteAppointment(id);
+          await fetchAppointments(); setShowDetails(false);
+          setSuccessMsg("Appointment deleted successfully!");
+        }}
+        darkMode={darkMode} />}
+
+      <Snackbar
+        open={!!successMsg}
+        autoHideDuration={4000}
+        onClose={() => setSuccessMsg("")}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+        <Alert
+          severity="success"
+          onClose={() => setSuccessMsg("")}>{successMsg}</Alert>
       </Snackbar>
 
-      <Snackbar open={!!conflictMsg} autoHideDuration={5000} onClose={() => setConflictMsg("")} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
-        <Alert severity="error" onClose={() => setConflictMsg("")}>{conflictMsg}</Alert>
+      <Snackbar
+        open={!!conflictMsg}
+        autoHideDuration={5000}
+        onClose={() => setConflictMsg("")}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+        <Alert
+          severity="error"
+          onClose={() => setConflictMsg("")}>{conflictMsg}</Alert>
       </Snackbar>
     </Box>
   );

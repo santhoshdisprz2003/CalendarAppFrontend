@@ -147,7 +147,7 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
 
       <DialogContent dividers className="appointment-dialog-content">
         <Box component="form" noValidate>
-          {/* Title */}
+          
           <TextField
             margin="normal"
             required
@@ -171,7 +171,7 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
             }}
           />
 
-          {/* Description */}
+         
           <TextField
             margin="normal"
             required
@@ -244,7 +244,7 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
             label="All Day Event"
           />
 
-          {/* Location */}
+         
           <TextField
             margin="normal"
             fullWidth
@@ -257,7 +257,7 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
             inputProps={{ maxLength: 15 }}
           />
 
-          {/* Attendees */}
+      
           <TextField
             margin="normal"
             fullWidth

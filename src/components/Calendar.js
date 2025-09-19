@@ -28,7 +28,7 @@ import {
 } from "../api/appointments";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-import "./Calendar.css";
+import "../Styles/Calendar.css";
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(BigCalendar);

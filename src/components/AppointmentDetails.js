@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import moment from 'moment';
-import './AppointmentDetails.css';
+import '../Styles/AppointmentDetails.css';
 
 const AppointmentDetails = ({ appointment, onClose, onEdit, onDelete, darkMode }) => {
   if (!appointment) return null;

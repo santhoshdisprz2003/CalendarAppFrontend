@@ -16,7 +16,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import "./SidebarMenu.css";
+import "../Styles/SidebarMenu.css";
+
 
 const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidth,darkMode}) => {
   const [selectedDate, setSelectedDate] = useState(null);

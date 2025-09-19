@@ -23,7 +23,7 @@ const safeDate = (date) => {
   return isNaN(d.getTime()) ? new Date() : d;
 };
 
-const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => {
+const AppointmentForm = ({ appointment, onSubmit, onCancel, open, darkMode }) => {
   const [formData, setFormData] = useState({
     id: appointment?.id || 0,
     title: appointment?.title || '',
@@ -90,6 +90,7 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
 
   const validateForm = () => {
     let tempErrors = {};
+    const now = new Date();
 
     if (!(formData.title || '').trim()) tempErrors.title = 'Title is required';
     if (!(formData.description || '').trim()) tempErrors.description = 'Description is required';
@@ -97,6 +98,15 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
     if (!formData.startTime) tempErrors.startTime = 'Start time is required';
     if (!formData.endTime) tempErrors.endTime = 'End time is required';
 
+    // Prevent past dates
+    if (formData.startTime && formData.startTime < now) {
+      tempErrors.startTime = 'Start time cannot be in the past';
+    }
+    if (formData.endTime && formData.endTime < now) {
+      tempErrors.endTime = 'End time cannot be in the past';
+    }
+
+    // End time must be after start time
     if (formData.startTime && formData.endTime && formData.endTime <= formData.startTime) {
       tempErrors.endTime = 'End time must be after start time';
     }
@@ -171,7 +181,6 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
             }}
           />
 
-         
           <TextField
             margin="normal"
             required
@@ -244,7 +253,6 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
             label="All Day Event"
           />
 
-         
           <TextField
             margin="normal"
             fullWidth
@@ -257,7 +265,6 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel, open,darkMode }) => 
             inputProps={{ maxLength: 15 }}
           />
 
-      
           <TextField
             margin="normal"
             fullWidth

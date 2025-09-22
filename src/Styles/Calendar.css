@@ -166,14 +166,14 @@ body {
   .rbc-event,
 .calendar-event {
   border-radius: var(--border-radius) !important;
-  padding: 2px 6px !important;  
-  font-size: 0.9rem !important; 
-  line-height: 1.2 !important;  
+  padding: 2px 6px !important;  /* reduced padding */
+  font-size: 0.9rem !important; /* slightly smaller text */
+  line-height: 1.2 !important;   /* tighter line spacing */
   box-shadow: var(--box-shadow) !important;
   font-weight: 500 !important;
   background-color: var(--primary-color) !important;
   color: white !important;
-  max-height: 30px !important; 
+  max-height: 30px !important;  /* limit height per event */
   overflow: hidden !important;
 }
 

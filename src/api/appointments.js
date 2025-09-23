@@ -1,33 +1,49 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:5000/api/appointments';
+// Create Axios instance
+const axiosInstance = axios.create({
+  baseURL: "http://localhost:5000/api", // backend base URL
+});
 
+// Add token interceptor
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// ✅ Get all appointments
 export const getAppointments = async () => {
-  const response = await axios.get(API_URL);
+  const response = await axiosInstance.get("/appointments");
   return response.data;
 };
 
+// ✅ Create a new appointment
 export const createAppointment = async (appointment) => {
   try {
-    const response = await axios.post(API_URL, appointment);
+    const response = await axiosInstance.post("/appointments", appointment);
     return response.data;
   } catch (err) {
-    // bubble conflict and other errors to caller
-    throw err;
+    throw err; // bubble errors to caller
   }
 };
 
+// ✅ Update an appointment
 export const updateAppointment = async (id, appointment) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, appointment);
+    const response = await axiosInstance.put(`/appointments/${id}`, appointment);
     return response.data;
   } catch (err) {
-    // bubble conflict and other errors to caller
     throw err;
   }
 };
 
+// ✅ Delete an appointment
 export const deleteAppointment = async (id) => {
-  const response = await axios.delete(`${API_URL}/${id}`);
+  const response = await axiosInstance.delete(`/appointments/${id}`);
   return response.data;
 };
+
+export default axiosInstance;

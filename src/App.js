@@ -27,6 +27,11 @@ const isTokenExpired = (token) => {
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const onLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false); // triggers login screen
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -37,13 +42,11 @@ function App() {
       setIsLoggedIn(true);
     }
 
-    // 🔹 Axios interceptor for auto-logout on 401
     const interceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
         if (error.response?.status === 401) {
-          localStorage.removeItem("token");
-          setIsLoggedIn(false);
+          onLogout(); // use the same logout function
         }
         return Promise.reject(error);
       }
@@ -58,7 +61,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {isLoggedIn ? (
-        <Calendar />
+        <Calendar onLogout={onLogout} />
       ) : (
         <Login onLogin={() => setIsLoggedIn(true)} />
       )}

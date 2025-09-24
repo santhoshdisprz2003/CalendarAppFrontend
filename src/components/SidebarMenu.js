@@ -10,16 +10,33 @@ import {
   Stack,
   Chip,
   TextField,
+  Button,
+  InputAdornment,
 } from "@mui/material";
-import { Delete, Edit, CalendarMonth, Search } from "@mui/icons-material";
+import {
+  Delete,
+  Edit,
+  CalendarMonth,
+  Search,
+  Logout,
+  Close,
+} from "@mui/icons-material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import "../Styles/SidebarMenu.css";
 
-
-const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidth,darkMode}) => {
+const SidebarMenu = ({
+  open,
+  onClose,
+  appointments,
+  onDelete,
+  onEdit,
+  drawerWidth,
+  darkMode,
+  onLogout,
+}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -36,7 +53,7 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
           .sort((a, b) => new Date(a.start) - new Date(b.start))
       : [];
 
-  // Apply search filter to both filtered and upcoming
+  // Apply search filter
   const applySearch = (apps) => {
     if (!searchQuery.trim()) return apps;
     return apps.filter((app) =>
@@ -47,14 +64,23 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
   filteredAppointments = applySearch(filteredAppointments);
   upcomingAppointments = applySearch(upcomingAppointments);
 
+  // ✅ Dynamic header title
+  let headerTitle = "Upcoming Appointments";
+  if (searchQuery.trim()) {
+    headerTitle = "Search Results";
+  } else if (selectedDate) {
+    headerTitle = `Appointments on ${selectedDate.format("MMM D, YYYY")}`;
+  }
+
   return (
     <Drawer
       anchor="left"
       open={open}
       onClose={onClose}
-     PaperProps={{
-    className: `sidebar-drawer ${darkMode ? "dark" : ""}`,
-  }}
+      PaperProps={{
+        className: `sidebar-drawer ${darkMode ? "dark" : ""}`,
+        style: { width: drawerWidth || 300 },
+      }}
     >
       <Box className="sidebar-container">
         {/* Sidebar Header */}
@@ -98,7 +124,7 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
           </Box>
         )}
 
-        {/* 🔎 Search Box (always visible) */}
+        {/* 🔎 Search Box */}
         <Box className="sidebar-search" sx={{ mt: 2, mb: 2 }}>
           <TextField
             value={searchQuery}
@@ -107,14 +133,25 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
             size="small"
             fullWidth
             InputProps={{
-              startAdornment: <Search sx={{ mr: 1, color: "action.active" }} />,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search sx={{ mr: 1, color: "action.active" }} />
+                </InputAdornment>
+              ),
+              endAdornment: searchQuery && (
+                <InputAdornment position="end">
+                  <IconButton size="small" onClick={() => setSearchQuery("")}>
+                    <Close fontSize="small" />
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
           />
         </Box>
 
-        {/* Upcoming Appointments Header */}
+        {/* Dynamic Header */}
         <Box className="sidebar-upcoming-header">
-          <Typography variant="subtitle1">Upcoming Appointments</Typography>
+          <Typography variant="subtitle1">{headerTitle}</Typography>
         </Box>
 
         {/* Appointment List */}
@@ -160,7 +197,7 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
                 </Paper>
               ))}
 
-            {/* If no date chosen → show all upcoming (with search applied) */}
+            {/* If no date chosen → show upcoming */}
             {!selectedDate &&
               (upcomingAppointments.length > 0 ? (
                 upcomingAppointments.map((app) => (
@@ -201,6 +238,18 @@ const SidebarMenu = ({ open, onClose, appointments, onDelete, onEdit, drawerWidt
                 </Typography>
               ))}
           </List>
+        </Box>
+
+        {/* 🚪 Logout Button */}
+        <Box sx={{ mt: 3, textAlign: "center" }}>
+          <Button
+            variant="outlined"
+            color="error"
+            startIcon={<Logout />}
+            onClick={onLogout}
+          >
+            Logout
+          </Button>
         </Box>
       </Box>
     </Drawer>

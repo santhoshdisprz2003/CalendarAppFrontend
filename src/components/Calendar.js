@@ -67,7 +67,7 @@ function CustomToolbar({ label, onNavigate, onView, currentView }) {
   );
 }
 
-function Calendar() {
+function Calendar({ onLogout }) {
   const [events, setEvents] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -192,6 +192,7 @@ function Calendar() {
         }}
         drawerWidth={drawerWidth}
         darkMode={darkMode}
+        onLogout={onLogout}
       />
 
       <Box

@@ -1,3 +1,15 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+body {
+  overflow-y: auto !important;
+}
+
+
 /* Global Variables */
 :root {
   --primary-color: #1976d2;
@@ -23,6 +35,7 @@ body {
   height: 100vh;
   background-color: var(--secondary-color);
   color: var(--text-color);
+  overflow: hidden;
 }
 
 .calendar-root.dark {
@@ -33,6 +46,10 @@ body {
 .calendar-main {
   flex-grow: 1;
   transition: margin 0.3s ease, width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* AppBar */
@@ -88,15 +105,22 @@ body {
 /*  Calendar Container & Wrapper*/
 .calendar-container {
   padding: 16px !important;
+  flex: 1;
+  overflow-y: auto !important; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
 }
 
 .calendar-wrapper {
   padding: 16px !important;
   border-radius: var(--border-radius) !important;
-  height: 75vh !important;
-  overflow: hidden !important;
+  flex: 1 !important; /* Take available space */
+  display: flex !important; /* Use flexbox */
+  flex-direction: column !important;
   background-color: #fff !important;
   color: #000 !important;
+  overflow: visible !important; /* Allow content to be visible */
+  min-height: 500px !important; /* Minimum height */
 }
 
 .calendar-root.dark .calendar-wrapper {
@@ -135,6 +159,15 @@ body {
   box-shadow: var(--box-shadow);
   padding: 10px;
   background: #fff;
+   flex: 1; /* Take available space */
+  min-height: 500px; /* Minimum height */
+  overflow: auto; /* Enable scrolling */
+}
+/* Add this new class for the main container to ensure proper scrolling */
+.calendar-container {
+  padding: 16px !important;
+  overflow-y: auto !important;
+  height: calc(100vh - 64px) !important; /* Subtract AppBar height */
 }
 
 .calendar-root.dark .rbc-calendar {
@@ -144,9 +177,18 @@ body {
 }
 
 .rbc-month-view,
-.rbc-time-view {
+.rbc-time-view,.rbc-agenda-view {
   border-spacing: 8px !important;
+    flex: 1;
+  min-height: 500px;
+
 }
+
+/* Ensure the calendar rows can grow */
+.rbc-month-row {
+  min-height: 80px; /* Ensure rows have minimum height */
+}
+
 
 .rbc-day-bg,
 .rbc-header {
@@ -173,7 +215,7 @@ body {
   font-weight: 500 !important;
   background-color: var(--primary-color) !important;
   color: white !important;
-  max-height: 30px !important;  /* limit height per event */
+  max-height: none !important;  /* limit height per event */
   overflow: hidden !important;
 }
 
@@ -340,7 +382,7 @@ button,
   }
 
   .calendar-wrapper {
-    height: 70vh !important;
+    min-height: 400px !important;
   }
 }
 
@@ -348,11 +390,18 @@ button,
 @media (max-width: 768px) {
   .calendar-root {
     flex-direction: column !important;
+    height: 100% !important;
+    min-height: 100vh !important;
   }
 
   .calendar-main {
     width: 100% !important;
     margin-left: 0 !important;
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+    .calendar-container {
+    min-height: 70vh !important;
   }
 
   .calendar-header {
@@ -384,7 +433,7 @@ button,
   }
 
   .calendar-wrapper {
-    height: 65vh !important;
+   min-height:65vh !important;
     padding: 8px !important;
   }
 
@@ -398,6 +447,9 @@ button,
   .calendar-header h2 {
     font-size: 1rem !important;
   }
+  .calendar-container {
+    padding: 8px !important;
+  }
 
   .calendar-toolbar button {
     font-size: 0.75rem !important;
@@ -409,6 +461,6 @@ button,
   }
 
   .calendar-wrapper {
-    height: 60vh !important;
+   min-height: 60vh !important;
   }
 }

@@ -201,6 +201,7 @@ function Calendar({ onLogout }) {
         style={{
           marginLeft: menuOpen ? `${drawerWidth}px` : 0,
           width: menuOpen ? `calc(100% - ${drawerWidth}px)` : "100%",
+
         }}
       >
         <AppBar position="static" className="calendar-appbar">
@@ -238,12 +239,13 @@ function Calendar({ onLogout }) {
               resizable
               onEventDrop={handleEventDrop}
               onEventResize={handleEventDrop}
-              style={{ height: "100%" }}
+style={{ height: "100%", minHeight: "500px" }}
               view={currentView}
               onView={(view) => setCurrentView(view)}
               components={{ toolbar: (props) => <CustomToolbar {...props} currentView={currentView} /> }}
               onSelectEvent={(event) => { setSelectedAppointment(event); setShowDetails(true); }}
               eventPropGetter={() => ({ className: "calendar-event" })}
+               scrollToTime={new Date()} // Add this to ensure proper initial scroll position
             />
           </Paper>
         </Box>

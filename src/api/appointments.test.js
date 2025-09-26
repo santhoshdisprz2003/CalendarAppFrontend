@@ -1,67 +1,142 @@
-// src/api/appointments.test.js
-import axiosInstance, {
+import axios from 'axios';
+import {
   getAppointments,
   createAppointment,
   updateAppointment,
-  deleteAppointment,
-} from "./appointments";
-import AxiosMockAdapter from "axios-mock-adapter";
+  deleteAppointment
+} from './appointments';
 
-describe("Appointments API", () => {
-  let mock;
+// Mock axios
+jest.mock('axios', () => {
+  // Create mock functions for all methods
+  const mockGet = jest.fn();
+  const mockPost = jest.fn();
+  const mockPut = jest.fn();
+  const mockDelete = jest.fn();
+  const mockRequestUse = jest.fn();
+  
+  // Create the mock axios instance that will be returned by axios.create()
+  const mockAxiosInstance = {
+    get: mockGet,
+    post: mockPost,
+    put: mockPut,
+    delete: mockDelete,
+    interceptors: {
+      request: {
+        use: mockRequestUse
+      }
+    }
+  };
+  
+  // Return the mock axios with create method that returns our instance
+  return {
+    create: jest.fn(() => mockAxiosInstance),
+    mockAxiosInstance, // Expose the instance for direct access in tests
+    mockGet,
+    mockPost,
+    mockPut,
+    mockDelete,
+    mockRequestUse
+  };
+});
 
+describe('Appointments API', () => {
   beforeEach(() => {
-    mock = new AxiosMockAdapter(axiosInstance);
+    // Clear all mocks
+    jest.clearAllMocks();
+    
+    // Set up localStorage mock
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => 'mock-token'),
+        setItem: jest.fn(),
+        removeItem: jest.fn()
+      },
+      writable: true
+    });
   });
 
-  afterEach(() => {
-    mock.restore();
-  });
+  test('getAppointments fetches data from the correct endpoint', async () => {
+    // Setup
+    const mockResponse = { data: [{ id: 1, title: 'Meeting' }] };
+    axios.mockGet.mockResolvedValueOnce(mockResponse);
 
-  test("getAppointments returns data", async () => {
-    const data = [{ id: 1, title: "Meeting" }];
-    mock.onGet("/appointments").reply(200, data);
-
+    // Execute
     const result = await getAppointments();
-    expect(result).toEqual(data);
+
+    // Assert
+    expect(axios.mockGet).toHaveBeenCalledWith('/appointments');
+    expect(result).toEqual(mockResponse.data);
   });
 
-  test("createAppointment posts data and returns result", async () => {
-    const appointment = { title: "New Meeting" };
-    const response = { id: 2, ...appointment };
-    mock.onPost("/appointments", appointment).reply(201, response);
+  test('createAppointment sends data to the correct endpoint', async () => {
+    // Setup
+    const appointmentData = { 
+      title: 'New Meeting', 
+      description: 'Discuss project',
+      startTime: new Date(),
+      endTime: new Date()
+    };
+    const mockResponse = { data: { id: 1, ...appointmentData } };
+    axios.mockPost.mockResolvedValueOnce(mockResponse);
 
-    const result = await createAppointment(appointment);
-    expect(result).toEqual(response);
+    // Execute
+    const result = await createAppointment(appointmentData);
+
+    // Assert
+    expect(axios.mockPost).toHaveBeenCalledWith('/appointments', appointmentData);
+    expect(result).toEqual(mockResponse.data);
   });
 
-  test("createAppointment throws on error", async () => {
-    const appointment = { title: "Fail Meeting" };
-    mock.onPost("/appointments", appointment).reply(400);
+  test('updateAppointment sends data to the correct endpoint with ID', async () => {
+    // Setup
+    const id = 1;
+    const appointmentData = { 
+      title: 'Updated Meeting', 
+      description: 'Revised agenda',
+      startTime: new Date(),
+      endTime: new Date()
+    };
+    const mockResponse = { data: { id, ...appointmentData } };
+    axios.mockPut.mockResolvedValueOnce(mockResponse);
 
-    await expect(createAppointment(appointment)).rejects.toThrow();
+    // Execute
+    const result = await updateAppointment(id, appointmentData);
+
+    // Assert
+    expect(axios.mockPut).toHaveBeenCalledWith(`/appointments/${id}`, appointmentData);
+    expect(result).toEqual(mockResponse.data);
   });
 
-  test("updateAppointment puts data and returns result", async () => {
-    const appointment = { title: "Updated Meeting" };
-    const response = { id: 1, ...appointment };
-    mock.onPut("/appointments/1", appointment).reply(200, response);
+  test('deleteAppointment sends request to the correct endpoint with ID', async () => {
+    // Setup
+    const id = 1;
+    const mockResponse = { data: { message: 'Appointment deleted' } };
+    axios.mockDelete.mockResolvedValueOnce(mockResponse);
 
-    const result = await updateAppointment(1, appointment);
-    expect(result).toEqual(response);
+    // Execute
+    const result = await deleteAppointment(id);
+
+    // Assert
+    expect(axios.mockDelete).toHaveBeenCalledWith(`/appointments/${id}`);
+    expect(result).toEqual(mockResponse.data);
   });
 
-  test("updateAppointment throws on error", async () => {
-    const appointment = { title: "Fail Update" };
-    mock.onPut("/appointments/99", appointment).reply(404);
-
-    await expect(updateAppointment(99, appointment)).rejects.toThrow();
+  test('createAppointment bubbles up errors', async () => {
+    // Setup
+    const error = new Error('Network error');
+    axios.mockPost.mockRejectedValueOnce(error);
+    
+    // Execute & Assert
+    await expect(createAppointment({})).rejects.toThrow('Network error');
   });
 
-  test("deleteAppointment deletes and returns result", async () => {
-    mock.onDelete("/appointments/1").reply(200, { success: true });
-
-    const result = await deleteAppointment(1);
-    expect(result).toEqual({ success: true });
+  test('updateAppointment bubbles up errors', async () => {
+    // Setup
+    const error = new Error('Server error');
+    axios.mockPut.mockRejectedValueOnce(error);
+    
+    // Execute & Assert
+    await expect(updateAppointment(1, {})).rejects.toThrow('Server error');
   });
 });

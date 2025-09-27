@@ -26,8 +26,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "eject": "react-scripts eject",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:all": "react-scripts test --watchAll",
+    "test:coverage": "react-scripts test --coverage --watchAll=false"
   },
   "browserslist": {
     "production": [
@@ -47,4 +49,5 @@
     "@testing-library/user-event": "^14.6.1",
     "sass": "^1.92.1"
   }
+  
 }

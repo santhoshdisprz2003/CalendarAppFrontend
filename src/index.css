@@ -14,9 +14,6 @@
         flex-direction: column;
     }
 
-    .rbc-calendar {
-        /* Custom styles for the calendar if needed */
-    }
 
     /* Media queries for smaller screens */
     @media (max-width: 600px) {
